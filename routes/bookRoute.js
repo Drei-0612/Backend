@@ -6,4 +6,4 @@ const bookRoutes = express.Router();
 
 bookRoutes.get('/', bookController.fetchAllBooks);
 
-export default bookRoutes;
+export default bookRoutes; 
