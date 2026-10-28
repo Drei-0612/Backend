@@ -1,4 +1,4 @@
-import * as studentController from '../controllers/bookController.js';
+import * as studentController from '../controllers/studentController.js';
 
 import express from 'express';
 

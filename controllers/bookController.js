@@ -1,16 +1,14 @@
-import * as bookService from'../services/bookService.js'; 
+import * as bookService from '../services/bookService.js';
 
 
 export const fetchAllBooks = async (req, res) => {
 
-const books = await bookService.fetchAllBooks();
-respose.status(200).jason(books)
+    const books = await bookService.fetchAllBooks();
+    res.status(200).json(books);
 
-}
+};
 
 export const createBook = async (req, res) => {
-    console.log(req);
-
     const { name, author } = req.body;
     const book = { name, author };
 
@@ -29,3 +27,38 @@ export const createBook = async (req, res) => {
         });
     }
 };
+
+export const editBook = async (req, res) => {
+    const { name, author } = req.body;
+    const book = { name, author };
+
+    try {
+        const affectedRows = await bookService.editBook(req.params.id, book);
+        if (affectedRows === 0) {
+            return res.status(404).json({ error: 'Book not found' });
+        }
+
+        res.status(200).json({ success: true });
+    } catch (e) {
+        console.log(e);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+};
+
+export const deleteBook = async (req, res) =>{
+const {id }= req.params;
+
+try{ 
+    const deletedBook = await bookService.deleteBook(parseInt(id));
+    res.status(200).json({ 
+        success: true,
+        message: deletedBook
+     });
+    }catch(e){
+        console.log(e);
+        res.status(500).json({
+            error: "Internal Server Error"
+        });
+    }
+
+}

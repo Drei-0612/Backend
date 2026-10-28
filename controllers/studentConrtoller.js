@@ -7,3 +7,5 @@ const students = await studentService.fetchAllStudents();
 res.status(200).json(students);
 
 }
+const students = await studentService.fetchAllStudents();
+res.status(200).json(students);
